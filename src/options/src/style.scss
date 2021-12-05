@@ -1,0 +1,51 @@
+@use "common/vars";
+
+/**
+ * The following styles get applied both on the frontend and in the editor.
+ */
+
+:root {
+	--bloc-shift-up: -5rem;
+	--bloc-shift-down: -5rem;
+	--bloc-padding-sm: 1rem;
+	--bloc-padding-md: 2.5rem;
+	--bloc-padding-lg: 5rem;
+	--bloc-max-width-sm: 30rem;
+	--bloc-max-width-md: 40rem;
+	--bloc-max-width-lg: 50rem;
+}
+
+$shift: (up: top, down: bottom);
+
+// Shift block styles
+@each $option, $position in $shift {
+	.bloc-shift-#{$option} {
+		position: relative;
+		margin-#{$position}: var(--bloc-shift-#{$option});
+		z-index: 2;
+	}
+}
+
+@each $breakpoint, $width in vars.$breakpoints {
+	// Padding styles
+	.bloc-padding-top-#{$breakpoint} {
+		padding-top: var(--bloc-padding-#{$breakpoint});
+	}
+
+	.bloc-padding-right-#{$breakpoint} {
+		padding-right: var(--bloc-padding-#{$breakpoint});
+	}
+
+	.bloc-padding-bottom-#{$breakpoint} {
+		padding-bottom: var(--bloc-padding-#{$breakpoint});
+	}
+
+	.bloc-padding-left-#{$breakpoint} {
+		padding-left: var(--bloc-padding-#{$breakpoint});
+	}
+
+	// Max width styles
+	.bloc-max-width-#{$breakpoint} {
+		max-width: var(--bloc-max-width-#{$breakpoint});
+	}
+}

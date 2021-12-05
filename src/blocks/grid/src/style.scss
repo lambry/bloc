@@ -1,0 +1,63 @@
+/**
+ * The following styles get applied both on the front end and in the editor.
+ */
+@use "common/vars";
+
+// Custom properties
+:root {
+	--bloc-grid-columns-gap: 2rem;
+	--bloc-grid-slider-gap: 20px;
+	--bloc-grid-slider-theme: currentColor;
+}
+
+// Columns for grids and optionally accordions
+@for $i from 1 through vars.$columns {
+	.bloc-grid-columns-sm-#{$i} {
+		grid-template-columns: repeat($i, 1fr);
+	}
+}
+
+@each $breakpoint, $width in vars.$breakpoints {
+	@media (min-width: $width) {
+		@for $i from 1 through vars.$columns {
+			.bloc-grid-columns-#{$breakpoint}-#{$i} {
+				grid-template-columns: repeat($i, 1fr);
+			}
+		}
+	}
+}
+
+// Block styles
+.bloc-grid {
+	&-align {
+		&-top {
+			align-items: start;
+		}
+
+		&-center {
+			align-items: center;
+		}
+
+		&-bottom {
+			align-items: end;
+		}
+	}
+
+	&-columns {
+		display: grid;
+
+		&-gap {
+			gap: var(--bloc-grid-columns-gap);
+		}
+	}
+
+	&-slider {
+		--swiper-theme-color: var(--bloc-grid-slider-theme);
+
+		position: relative;
+
+		&-gap {
+			gap: var(--bloc-grid-slider-gap);
+		}
+	}
+}

@@ -1,0 +1,25 @@
+/**
+ * The following styles get applied on the frontend only.
+ */
+:root {
+	--bloc-posts-slider-speed: 250;
+	--bloc-posts-accordion-speed: 0.5s;
+	--bloc-posts-accordion-easing: cubic-bezier(0.46, 0.03, 0.52, 0.96);
+}
+
+// Block styles
+.bloc-posts {
+	&-slider {
+		transition-duration: var(--bloc-posts-slider-speed);
+	}
+
+	&-accordion {
+		&-toggle {
+			cursor: pointer;
+		}
+
+		&-content {
+			transition: height var(--bloc-posts-accordion-speed) var(--bloc-posts-accordion-easing);
+		}
+	}
+}

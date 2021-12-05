@@ -1,0 +1,66 @@
+/**
+ * The following styles get applied both on the front end and in the editor.
+ */
+@use "common/vars";
+
+// Custom properties
+:root {
+	--bloc-posts-grid-gap: 2rem;
+	--bloc-posts-slider-gap: 20px;
+	--bloc-posts-accordion-gap: 1.5rem;
+	--bloc-posts-slider-theme: currentColor;
+}
+
+// Columns for grids and optionally accordions
+@for $i from 1 through vars.$columns {
+	.bloc-posts-columns-sm-#{$i} {
+		grid-template-columns: repeat($i, 1fr);
+	}
+}
+
+@each $breakpoint, $width in vars.$breakpoints {
+	@media (min-width: $width) {
+		@for $i from 1 through vars.$columns {
+			.bloc-posts-columns-#{$breakpoint}-#{$i} {
+				grid-template-columns: repeat($i, 1fr);
+			}
+		}
+	}
+}
+
+// Block styles
+.bloc-posts {
+	&-grid {
+		display: grid;
+		gap: var(--bloc-posts-grid-gap);
+	}
+
+	&-slider {
+		--swiper-theme-color: var(--bloc-posts-slider-theme);
+
+		position: relative;
+		gap: var(--bloc-posts-slider-gap);
+	}
+
+	&-accordion {
+		display: grid;
+		gap: var(--bloc-posts-accordion-gap);
+
+		&-title {
+			margin: 0;
+		}
+
+		&-toggle {
+			all: unset;
+			width: 100%;
+		}
+
+		&-content {
+			overflow: hidden;
+		}
+
+		&-item:not(.is-open) .bloc-posts-accordion-content {
+			display: none;
+		}
+	}
+}

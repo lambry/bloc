@@ -1,0 +1,6 @@
+// Sass variables
+$columns: 6;
+
+$breakpoints: (sm: 0, md: 660px, lg: 980px);
+
+$breakpointKeys: map-keys($breakpoints);

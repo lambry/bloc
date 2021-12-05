@@ -1,0 +1,8 @@
+// Editor only styles
+.bloc-grid {
+	> .bloc-grid-column {
+		max-width: none;
+		margin-left: 0;
+		margin-right: 0;
+	}
+}

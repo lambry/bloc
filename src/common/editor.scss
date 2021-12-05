@@ -1,0 +1,41 @@
+// Editor only common styles
+@import "swiper/scss";
+@import "swiper/scss/navigation";
+@import "swiper/scss/pagination";
+
+// Controls
+.bloc-panel {
+	> *:not(.components-toggle-control) + .components-toggle-control {
+		padding-top: 10px;
+	}
+}
+
+.bloc-breakpoints {
+	position: relative;
+	padding-top: 5px;
+
+	&-options {
+		position: absolute;
+		right: 0;
+		top: 5px;
+		width: 115px;
+		display: flex;
+		gap: 5px;
+	}
+
+	.components-button-group .components-button {
+		height: auto;
+		line-height: 1;
+		padding: 2px 0;
+		box-shadow: none;
+		border-width: 1px;
+		border-style: solid;
+		border-color: transparent;
+		border-radius: 0;
+		text-decoration: none;
+
+		&.is-active {
+			border-bottom-color: currentColor;
+		}
+	}
+}

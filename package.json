@@ -1,0 +1,38 @@
+{
+	"name": "bloc",
+	"version": "0.1.1",
+	"description": "A few useful WordPress blocks.",
+	"author": "Lambry",
+	"license": "GPL-2.0-or-later",
+	"main": "src/editor.js",
+	"scripts": {
+		"build": "npm run build:editor && npm run build:frontend",
+		"build:editor": "wp-scripts build ./src/editor.js --output-path=build/editor",
+		"build:frontend": "wp-scripts build ./src/frontend.js --output-path=build/frontend",
+		"format:js": "wp-scripts format-js",
+		"lint:css": "wp-scripts lint-style",
+		"lint:js": "wp-scripts lint-js",
+		"start": "npm run start:editor",
+		"start:editor": "wp-scripts start ./src/editor.js --output-path=build/editor",
+		"start:frontend": "wp-scripts start ./src/frontend.js --output-path=build/frontend",
+		"packages-update": "wp-scripts packages-update"
+	},
+	"devDependencies": {
+		"@wordpress/scripts": "^19.2.2"
+	},
+	"dependencies": {
+		"@wordpress/api-fetch": "^5.2.6",
+		"@wordpress/block-editor": "^8.0.5",
+		"@wordpress/blocks": "^11.1.4",
+		"@wordpress/components": "^19.0.5",
+		"@wordpress/compose": "^5.0.6",
+		"@wordpress/data": "^6.1.4",
+		"@wordpress/element": "^4.0.4",
+		"@wordpress/hooks": "^3.2.2",
+		"@wordpress/i18n": "^4.2.4",
+		"@wordpress/icons": "^6.1.1",
+		"@wordpress/server-side-render": "^3.0.9",
+		"classnames": "^2.3.1",
+		"swiper": "^7.3.1"
+	}
+}

@@ -1,0 +1,79 @@
+@use "common/vars";
+
+/**
+ * The following styles get applied to the frontend only.
+ */
+
+:root {
+	--bloc-animation-duration: 1s;
+	--bloc-animation-distance: 1rem;
+	--bloc-animation-easing: cubic-bezier(0.46, 0.03, 0.52, 0.96);
+}
+
+$animations: (fade-in, fade-up, fade-down, fade-left, fade-right);
+
+@each $breakpoint, $width in vars.$breakpoints {
+	$index: index(vars.$breakpointKeys, $breakpoint);
+
+	// Visibility styles
+	$max: if($index < 3, map-get(vars.$breakpoints, nth(vars.$breakpointKeys, index(vars.$breakpointKeys, $breakpoint) + 1)), 0);
+
+	@if $width == 0 {
+		@media (max-width: $max) {
+			.bloc-hide-#{$breakpoint} {
+				display: none;
+			}
+		}
+	} @else if $max == 0 {
+		@media (min-width: $width) {
+			.bloc-hide-#{$breakpoint} {
+				display: none;
+			}
+		}
+	} @else {
+		@media (min-width: $width) and (max-width: $max) {
+			.bloc-hide-#{$breakpoint} {
+				display: none;
+			}
+		}
+	}
+}
+
+// Animation styles
+@each $animation in $animations {
+	.bloc-animate-#{$animation} {
+		animation: var(--bloc-animation-duration) var(--bloc-animation-easing) 0s 1 forwards bloc-animate-#{$animation};
+		animation-play-state: paused;
+	}
+
+	@keyframes bloc-animate-#{$animation} {
+		from {
+			opacity: 0;
+
+			@if $animation == fade-up {
+				transform: translate(0, var(--bloc-animation-distance));
+			}
+			@if $animation == fade-down {
+				transform: translate(0, calc(-1 * var(--bloc-animation-distance)));
+			}
+			@if $animation == fade-left {
+				transform: translate(var(--bloc-animation-distance), 0);
+			}
+			@if $animation == fade-right {
+				transform: translate(calc(-1 * var(--bloc-animation-distance)), 0);
+			}
+		}
+
+		to {
+			opacity: 1;
+
+			@if animation != fade-in {
+				transform: translate(0, 0);
+			}
+		}
+	}
+}
+
+.bloc-animate-in {
+	animation-play-state: running;
+}
