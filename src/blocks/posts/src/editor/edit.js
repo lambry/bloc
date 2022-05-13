@@ -4,14 +4,14 @@ import ServerSideRender from "@wordpress/server-side-render";
 import { InspectorControls } from "@wordpress/block-editor";
 import { PanelBody, SelectControl, FormTokenField, RangeControl, ToggleControl, TextControl } from "@wordpress/components";
 import { useState, useEffect } from "@wordpress/element";
-import Breakpoints from "common/breakpoints";
+import Breakpoints from "common/components/breakpoints";
 import { displayOptions, filterTypes, orderOptions, orderByOptions } from "./options";
-import { get, query, unique, debounce, tokenValues, tokenLabels, tokenSuggestions } from "common/helpers";
+import { get, query, unique, debounce, tokenValues, tokenLabels, tokenSuggestions } from "common/scripts/helpers";
 
 import "./editor.scss";
 
 export default function Edit({ attributes, setAttributes }) {
-	const { display, number, columnsSmall, columnsMedium, columnsLarge, autoPlay, loopSlides, fadeSlides, openFirst, openIndividually, navigation, pagination, loadMore, type, taxonomy, term, offset, specific, include, children, sticky, filter, filterBy, filterType, filterValue, order, orderBy, orderMeta } = attributes;
+	const { display, number, columnsSmall, columnsMedium, columnsLarge, autoPlay, fadeSlides, loopSlides, openFirst, openIndividually, navigation, pagination, type, taxonomy, term, offset, specific, include, children, sticky, filter, filterBy, filterType, filterValue, order, orderBy, orderMeta } = attributes;
 
 	const types = [...(useSelect((select) => select("core").getPostTypes()) || [])]
 		.filter(({ viewable }) => viewable)
@@ -21,7 +21,6 @@ export default function Edit({ attributes, setAttributes }) {
 	let [taxonomies, setTaxonomies] = useState([]);
 	let [includes, setIncludes] = useState([]);
 	let [fields, setFields] = useState([]);
-	let [column, showColumn] = useState("large");
 
 	// On load setup
 	useEffect(() => {
@@ -78,8 +77,8 @@ export default function Edit({ attributes, setAttributes }) {
 							onChange={(number) => setAttributes({ number })}
 						/>
 					)}
-					<Breakpoints active={column} setActive={showColumn}>
-						{column === "small" && (
+					<Breakpoints render={breakpoint => <>
+						{breakpoint === "small" && (
 							<RangeControl
 								min={1}
 								max={6}
@@ -88,7 +87,7 @@ export default function Edit({ attributes, setAttributes }) {
 								onChange={(columnsSmall) => setAttributes({ columnsSmall })}
 							/>
 						)}
-						{column === "medium" && (
+						{breakpoint === "medium" && (
 							<RangeControl
 								min={1}
 								max={6}
@@ -97,7 +96,7 @@ export default function Edit({ attributes, setAttributes }) {
 								onChange={(columnsMedium) => setAttributes({ columnsMedium })}
 							/>
 						)}
-						{column === "large" && (
+						{breakpoint === "large" && (
 							<RangeControl
 								min={1}
 								max={6}
@@ -106,8 +105,8 @@ export default function Edit({ attributes, setAttributes }) {
 								onChange={(columnsLarge) => setAttributes({ columnsLarge })}
 							/>
 						)}
-					</Breakpoints>
-					{display === "slider" && (
+					</>} />
+					{display === "slider" && <>
 						<RangeControl
 							min={0}
 							max={10}
@@ -116,63 +115,39 @@ export default function Edit({ attributes, setAttributes }) {
 							renderTooltipContent={(value) => `${value}s`}
 							onChange={(autoPlay) => setAttributes({ autoPlay })}
 						/>
-					)}
-					{display === "slider" && (
+						<ToggleControl
+							label={__("Fade slides", "bloc")}
+							checked={fadeSlides}
+							onChange={() => setAttributes({ fadeSlides: !fadeSlides })}
+						/>
 						<ToggleControl
 							label={__("Loop slides", "bloc")}
 							checked={loopSlides}
 							onChange={() => setAttributes({ loopSlides: !loopSlides })}
 						/>
-					)}
-					{display === "slider" && (
-						<ToggleControl
-							label={__("Fade between slides", "bloc")}
-							checked={fadeSlides}
-							onChange={() => setAttributes({ fadeSlides: !fadeSlides })}
-						/>
-					)}
-					{display === "accordion" && (
-						<ToggleControl
-							label={__("Open first item", "bloc")}
-							checked={openFirst}
-							onChange={() => setAttributes({ openFirst: !openFirst })}
-						/>
-					)}
-					{display === "accordion" && (
-						<ToggleControl
-							label={__("Open one at a time", "bloc")}
-							checked={openIndividually}
-							onChange={() => setAttributes({ openIndividually: !openIndividually })}
-						/>
-					)}
-					{display === "slider" && (
 						<ToggleControl
 							label={__("Show navigation", "bloc")}
 							checked={navigation}
 							onChange={() => setAttributes({ navigation: !navigation })}
 						/>
-					)}
-					{(display === "slider" ||
-						(!specific && !include.length)) && (
 						<ToggleControl
 							label={__("Show pagination", "bloc")}
 							checked={pagination}
-							onChange={() => setAttributes({
-								pagination: !pagination,
-								loadMore: false,
-							})}
+							onChange={() => setAttributes({ pagination: !pagination })}
 						/>
-					)}
-					{display !== "slider" && !specific && !include.length && (
+					</>}
+					{display === "accordion" && <>
 						<ToggleControl
-							label={__("Show load more", "bloc")}
-							checked={loadMore}
-							onChange={() => setAttributes({
-								loadMore: !loadMore,
-								pagination: false,
-							})}
+							label={__("Open first item", "bloc")}
+							checked={openFirst}
+							onChange={() => setAttributes({ openFirst: !openFirst })}
 						/>
-					)}
+						<ToggleControl
+							label={__("Open one at a time", "bloc")}
+							checked={openIndividually}
+							onChange={() => setAttributes({ openIndividually: !openIndividually })}
+						/>
+					</>}
 				</PanelBody>
 				<PanelBody title={__("Source", "bloc")} initialOpen={false}>
 					{!specific && (

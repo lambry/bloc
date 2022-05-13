@@ -43,7 +43,7 @@ export default {
 		type: "string",
 		default: "",
 	},
-	whenRole: {
+	restrictTo: {
 		type: "array",
 		default: [],
 		items: {

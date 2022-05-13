@@ -5,9 +5,8 @@ import { arrowUp, arrowDown } from "@wordpress/icons";
  * Default blocks supporting sizes.
  */
  export const supportsOptions = [
-	"bloc/grid",
-	"bloc/grid-column",
-	"bloc/slider",
+	"bloc/content",
+	"bloc/content-cell",
 	"core/group",
 	"core/columns",
 	"core/column",

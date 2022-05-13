@@ -26,13 +26,13 @@
 		"@wordpress/blocks": "^11.1.4",
 		"@wordpress/components": "^19.0.5",
 		"@wordpress/compose": "^5.0.6",
-		"@wordpress/data": "^6.1.4",
+		"@wordpress/data": "^6.8.0",
 		"@wordpress/element": "^4.0.4",
 		"@wordpress/hooks": "^3.2.2",
 		"@wordpress/i18n": "^4.2.4",
 		"@wordpress/icons": "^6.1.1",
 		"@wordpress/server-side-render": "^3.0.9",
 		"classnames": "^2.3.1",
-		"swiper": "^7.3.1"
+		"swiper": "^8.1.4"
 	}
 }

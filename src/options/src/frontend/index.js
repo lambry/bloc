@@ -3,7 +3,7 @@ import "./style.scss";
 (function () {
 	const animated = document.querySelectorAll('[class*="bloc-animate"]');
 
-	[...animated].forEach((element) => {
+	animated.forEach((element) => {
 		let observer = new IntersectionObserver((entries, observer) => {
 			entries.forEach((entry) => {
 				if (entry.isIntersecting && entry.intersectionRatio) {

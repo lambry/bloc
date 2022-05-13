@@ -23,27 +23,29 @@ class Options
 	 */
 	public function endpoints() : void
 	{
-		register_rest_route('bloc/options', '/roles', [
+		register_rest_route('bloc', '/options', [
 			'methods'  => \WP_REST_Server::READABLE,
 			'permission_callback' => fn() => current_user_can('edit_posts'),
-			'callback' => [$this, 'roles']
+			'callback' => [$this, 'options']
 		]);
 	}
 
 	/**
-	 * Get all user roles.
+	 * Get all cachable options.
 	 */
-	public function roles() : array
+	public function options() : array
 	{
 		$roles = array_merge(wp_roles()->role_names, [
 			'logged-in' => 'Logged In',
 			'logged-out' => 'Logged Out'
 		]);
 
-		return array_map(fn($name, $slug) => [
-			'value' => $slug,
-			'label' => $name
-		], $roles, array_keys($roles));
+		return [
+			'roles' => array_map(fn($name, $slug) => [
+				'value' => $slug,
+				'label' => $name
+			], $roles, array_keys($roles))
+		];
 	}
 
 	/**
@@ -51,9 +53,9 @@ class Options
 	 */
 	public function block(string $content, array $block) : string
 	{
-		if (isset($block['attrs']['whenRole']) && $block['attrs']['whenRole']) {
+		if (isset($block['attrs']['restrictTo']) && $block['attrs']['restrictTo']) {
 			$user = wp_get_current_user();
-			$roles = (array) $block['attrs']['whenRole'];
+			$roles = (array) $block['attrs']['restrictTo'];
 
 			// Show block for logged out user
 			if (! $user->roles && in_array('logged-out', $roles)) {

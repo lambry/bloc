@@ -1,25 +1,22 @@
 import { __ } from "@wordpress/i18n";
 import { addFilter } from "@wordpress/hooks";
-import { Fragment, useState, useEffect } from "@wordpress/element";
+import { useSelect } from "@wordpress/data";
+import { Fragment } from "@wordpress/element";
 import { createHigherOrderComponent } from "@wordpress/compose";
 import { InspectorControls, BlockControls } from "@wordpress/block-editor";
 import { PanelBody, SelectControl, DropdownMenu, ToggleControl, FormTokenField } from "@wordpress/components";
 import { flipVertical } from "@wordpress/icons";
 import { supportsOptions, sizes, shift, animations } from "./options";
-import { get, tokenValues, tokenLabels, tokenSuggestions } from "common/helpers";
+import { tokenValues, tokenLabels, tokenSuggestions } from "common/scripts/helpers";
 
 /**
  * Add new editor controls.
  */
 addFilter("editor.BlockEdit", "bloc/options", createHigherOrderComponent((BlockEdit) => (props) => {
 	const { name, attributes, setAttributes } = props;
-	const { shiftBlock, maxWidth, paddingTop, paddingRight, paddingBottom, paddingLeft, animateIn, whenRole, hideSmall, hideMedium, hideLarge } = attributes;
+	const { shiftBlock, maxWidth, paddingTop, paddingRight, paddingBottom, paddingLeft, animateIn, restrictTo, hideSmall, hideMedium, hideLarge } = attributes;
 
-	let [roles, setRoles] = useState([]);
-
-	useEffect(() => {
-		get("options/roles").then(setRoles);
-	}, []);
+	const roles = [...(useSelect((select) => select("bloc/options").getOptions('roles')) || [])]
 
 	if (!supportsOptions.includes(name)) {
 		return <BlockEdit {...props} />;
@@ -87,10 +84,10 @@ addFilter("editor.BlockEdit", "bloc/options", createHigherOrderComponent((BlockE
 						onChange={(animateIn) => setAttributes({ animateIn })}
 					/>
 					<FormTokenField
-						label={__("Only show when", "bloc")}
-						value={tokenLabels(whenRole, roles)}
+						label={__("Retrict block to", "bloc")}
+						value={tokenLabels(restrictTo, roles)}
 						suggestions={tokenSuggestions(roles)}
-						onChange={(values) => setAttributes({ whenRole: tokenValues(values, roles) })}
+						onChange={(values) => setAttributes({ restrictTo: tokenValues(values, roles) })}
 					/>
 					<ToggleControl
 						label={__("Hide on small screens", "bloc")}

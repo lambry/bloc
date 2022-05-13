@@ -3,20 +3,20 @@
 	const accordionItems = document.querySelectorAll(".bloc-posts-accordion-item");
 
 	// Auto open the first accordion?
-	[...accordions].forEach((accordion) => {
+	accordions.forEach((accordion) => {
 		if (accordion.dataset.openFirst === "1") {
 			openAccordion(accordion.querySelector(".bloc-posts-accordion-item"));
 		}
 	});
 
 	// Setup accordion item events
-	[...accordionItems].forEach((accordion) => {
+	accordionItems.forEach((accordion) => {
 		accordion.querySelector(".bloc-posts-accordion-toggle").addEventListener("click", () => {
 			const parent = accordion.closest(".bloc-posts-accordion");
 
 			// Close other items?
 			if (parent.dataset.openIndividually === "1") {
-				[...parent.querySelectorAll(".is-open")].forEach(item => closeAccordion(item));
+				parent.querySelectorAll(".is-open").forEach(item => closeAccordion(item));
 			}
 
 			if (accordion.classList.contains("is-open")) {

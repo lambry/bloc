@@ -1,5 +1,5 @@
 import { __ } from "@wordpress/i18n";
-import { layout, flipHorizontal, plus } from "@wordpress/icons";
+import { grid, flipHorizontal, plus } from "@wordpress/icons";
 
 export default [
 	{
@@ -8,7 +8,7 @@ export default [
 		title: __("Posts Grid", "bloc"),
 		description: __("Display posts in a Grid", "bloc"),
 		keywords: [__("grid", "bloc")],
-		icon: layout,
+		icon: grid,
 		attributes: { display: "grid" },
 	}, {
 		name: "slider",

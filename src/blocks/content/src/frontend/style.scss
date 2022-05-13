@@ -1,0 +1,11 @@
+/**
+ * The following styles get applied on the frontend only.
+ */
+ :root {
+	--bloc-content-slider-speed: 250;
+}
+
+// Block styles
+.bloc-content-slider {
+	position: relative;
+}

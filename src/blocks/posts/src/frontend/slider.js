@@ -1,22 +1,24 @@
-import Swiper, { EffectFade, Autoplay, Navigation, Pagination } from "swiper";
+import Swiper, { Autoplay, EffectFade, Navigation, Pagination } from "swiper";
 
 // configure Swiper to use modules
-Swiper.use([EffectFade, Autoplay, Navigation, Pagination]);
+Swiper.use([Autoplay, EffectFade, Navigation, Pagination]);
 
 (function () {
 	const sliders = document.querySelectorAll(".bloc-posts-slider");
 
 	const getProp = (el, name) => parseInt(getComputedStyle(el).getPropertyValue(`--bloc-posts-slider-${name}`));
 
-	[...sliders].forEach((item, i) => {
-		const { columnsSm, columnsMd, columnsLg, autoPlay, loopSlides, fadeSlides } = item.dataset;
+	sliders.forEach((item, i) => {
+		const { columnsSm, columnsMd, columnsLg, autoPlay, fadeSlides, loopSlides } = item.dataset;
 
 		item.classList.add(`bloc-posts-slider-${i}`);
 
 		new Swiper(item.querySelector('.swiper'), {
-			effect: fadeSlides ? 'fade' : 'slide',
-			fadeEffect: { crossFade: true },
-			loop: loopSlides,
+			effect: fadeSlides === '1' ? 'fade' : 'slide',
+			fadeEffect: {
+				crossFade: true
+			},
+			loop: loopSlides === 'true',
 			speed: getProp(item, 'speed'),
 			spaceBetween: getProp(item, 'gap'),
 			autoplay: Number(autoPlay) ? {
@@ -25,11 +27,11 @@ Swiper.use([EffectFade, Autoplay, Navigation, Pagination]);
 			} : false,
 			pagination: {
 				clickable: true,
-				el: `.bloc-posts-slider-${i} .bloc-posts-slider-pagination`,
+				el: `.bloc-posts-slider-${i} .swiper-pagination`,
 			},
 			navigation: {
-				nextEl: `.bloc-posts-slider-${i} .bloc-posts-slider-button-next`,
-				prevEl: `.bloc-posts-slider-${i} .bloc-posts-slider-button-prev`,
+				nextEl: `.bloc-posts-slider-${i} .swiper-button-next`,
+				prevEl: `.bloc-posts-slider-${i} .swiper-button-prev`,
 			},
 			slidesPerView: columnsSm,
 			breakpoints: {

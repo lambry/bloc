@@ -9,10 +9,6 @@
 
 // Block styles
 .bloc-posts {
-	&-slider {
-		transition-duration: var(--bloc-posts-slider-speed);
-	}
-
 	&-accordion {
 		&-toggle {
 			cursor: pointer;

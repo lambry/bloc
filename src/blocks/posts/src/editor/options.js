@@ -22,7 +22,7 @@ export const filterTypes = [
 
 export const orderByOptions = [
 	{ value: "ID", label: __("ID", "bloc") },
-	{ value: "date", label: __("Publish Date", "bloc") },
+	{ value: "date", label: __("Published Date", "bloc") },
 	{ value: "modified", label: __("Modified Date", "bloc") },
 	{ value: "title", label: __("Title", "bloc") },
 	{ value: "name", label: __("Slug", "bloc") },

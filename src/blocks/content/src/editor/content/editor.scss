@@ -1,0 +1,19 @@
+// Editor only styles
+@use "sass:math";
+@use "common/styles/vars";
+
+.bloc-content {
+	&-slider {
+		&[data-pagination="false"] {
+			.swiper-pagination {
+				display: none;
+			}
+		}
+
+		&[data-navigation="false"] {
+			.swiper-navigation {
+				display: none;
+			}
+		}
+	}
+}

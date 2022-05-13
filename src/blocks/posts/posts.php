@@ -104,7 +104,7 @@ class Posts
 
 		set_query_var('id', get_post_field('post_name', get_the_ID()));
 
-		if ($display_type = $this->template("{$display}-{$type}")) {
+		if ($display_type = $this->template("{$display}-item-{$type}")) {
 			echo $display_type;
 		} else {
 			echo $this->template("{$display}-item");

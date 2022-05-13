@@ -23,11 +23,11 @@
 		"type": "number",
 		"default": 0
 	},
-	"loopSlides": {
+	"fadeSlides": {
 		"type": "boolean",
 		"default": false
 	},
-	"fadeSlides": {
+	"loopSlides": {
 		"type": "boolean",
 		"default": false
 	},
@@ -44,10 +44,6 @@
 		"default": false
 	},
 	"pagination": {
-		"type": "boolean",
-		"default": false
-	},
-	"loadMore": {
 		"type": "boolean",
 		"default": false
 	},

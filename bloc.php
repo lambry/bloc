@@ -46,9 +46,8 @@ class Bloc
 		$this->frontend = include plugin_dir_path(__FILE__) . 'build/frontend/frontend.asset.php';
 
 		$this->include('options/options', 'Options');
-		$this->include('blocks/grid/grid', 'Blocks\Grid');
+		$this->include('blocks/content/content', 'Blocks\Content');
 		$this->include('blocks/posts/posts', 'Blocks\Posts');
-		$this->include('blocks/slider/slider', 'Blocks\Slider');
 	}
 
 	/**

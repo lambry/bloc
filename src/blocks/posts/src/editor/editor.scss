@@ -1,12 +1,12 @@
 // Editor only styles
 @use "sass:math";
-@use "common/vars";
+@use "common/styles/vars";
 
-@for $i from 1 through vars.$columns {
-	.bloc-posts[data-columns-small="#{$i}"] .bloc-posts-slider-item {
-		flex-basis: math.div(100%, $i);
-	}
-}
+// @for $i from 1 through vars.$columns {
+// 	.bloc-posts[data-columns-small="#{$i}"] .bloc-posts-slider-item {
+// 		flex-basis: math.div(100%, $i);
+// 	}
+// }
 
 @each $breakpoint, $width in vars.$breakpoints {
 	@media (min-width: $width) {

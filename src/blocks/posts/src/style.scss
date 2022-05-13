@@ -1,7 +1,7 @@
 /**
  * The following styles get applied both on the front end and in the editor.
  */
-@use "common/vars";
+@use "common/styles/vars";
 
 // Custom properties
 :root {
@@ -9,6 +9,7 @@
 	--bloc-posts-slider-gap: 20px;
 	--bloc-posts-accordion-gap: 1.5rem;
 	--bloc-posts-slider-theme: currentColor;
+	--bloc-posts-slider-speed: 300;
 }
 
 // Columns for grids and optionally accordions
