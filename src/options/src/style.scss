@@ -1,9 +1,9 @@
+/**
+ * The following styles get applied both on the front end and in the editor.
+ */
 @use "common/styles/vars";
 
-/**
- * The following styles get applied both on the frontend and in the editor.
- */
-
+// Custom properties
 :root {
 	--bloc-shift-up: -5rem;
 	--bloc-shift-down: -5rem;

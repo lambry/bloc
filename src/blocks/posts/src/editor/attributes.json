@@ -47,6 +47,10 @@
 		"type": "boolean",
 		"default": false
 	},
+	"gapless": {
+		"type": "boolean",
+		"default": false
+	},
 	"type": {
 		"type": "array",
 		"default": ["post"],

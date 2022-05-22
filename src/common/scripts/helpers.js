@@ -84,8 +84,17 @@ export function tokenSuggestions(values = []) {
 /**
  * Get a CSS custom property value.
  */
-export function getProp(el, name, type = "int") {
-	const prop = getComputedStyle(el).getPropertyValue(`--bloc-${name}`);
+export function getProp(el, name, params = {}) {
+	const { integer = false, computed = false } = params;
 
-	return type === "int" ? parseInt(prop) : prop;
+	let value = 0;
+
+	if (computed) {
+		value = getComputedStyle(el)[name];
+	} else {
+		value = getComputedStyle(el).getPropertyValue(`--bloc-${name}`);
+	}
+
+
+	return integer ? parseInt(value) : value;
 }

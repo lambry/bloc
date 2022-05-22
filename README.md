@@ -33,25 +33,46 @@ Extensions to core blocks for a little extra functionality.
 }
 ```
 
-## Content
+## Grid
 
-Block to display content as a `grid` or `slider`.
+Block to display content in a grid of rows and columns.
 
 ### Features
 
 - Display any number of items.
-- Choose the number to show per row or viewport at different screen sizes.
-- Optionally remove spacing between columns and slides.
-- Slider only options include: autoplay, fade, loop, navigation and pagination.
+- Choose the number columns to show per row at different screen sizes.
+- Add or remove spacing between columns.
+- Choose the number of columns or rows any individual column should span.
 
 ### Custom properties
 
 ```css
 :root {
-	--bloc-grid-columns-gap: 2rem;
-	--bloc-grid-slider-gap: 20px;
-	--bloc-grid-slider-speed: 250;
-	--bloc-grid-slider-theme: currentColor;
+	--bloc-grid-gap: 2rem;
+}
+```
+
+## Slider
+
+Block to display content in a slider, or carousel (i.e. a slider with multiple slides shown at once).
+
+### Features
+
+- Display any number of slides.
+- Choose the number slides to show a once at different screen sizes.
+- Tranition between slides with swiper or fade effects.
+- Loop slidesfor an inifitnte slider.
+- Show or hide the navigation arrows.
+- Show or hide the pagination i.e. bullets.
+- Add or remove spacing between slides.
+
+### Custom properties
+
+```css
+:root {
+	--bloc-slider-gap: 2rem;
+	--bloc-slider-speed: 250;
+	--bloc-slider-theme: currentColor;
 }
 ```
 
@@ -78,6 +99,17 @@ You can override any aspect of the display by adding template files in a folder 
 - `grid-item.php`, `slider-item.php` and `accordion-item.php` will override the template/display for individual posts within those display types.
 - `grid-item-{post-type}.php`, `slider-item-{post-type}.php` and `accordion-item-{post-type}.php` will override the template by post type, for example `grid-item-post.php` will override `grid-item.php` for posts and `slider-item-page.php` would override `slider-item.php` for pages.
 
+### Custom properties
+
+```css
+:root {
+	--bloc-posts-gap: 2rem;
+	--bloc-posts-theme: currentColor;
+	--bloc-posts-easing: cubic-bezier(0.46, 0.03, 0.52, 0.96);
+	--bloc-posts-duration: 250;
+}
+```
+
 ### Filters
 
 ```php
@@ -90,24 +122,3 @@ add_filter('postie/empty', function(string $message, string $display) {
     return __('Sorry, there were no matching results.');
 }, 10, 2);
 ```
-
-### Custom properties
-
-```css
-:root {
-	--bloc-posts-grid-gap: 2rem;
-	--bloc-posts-slider-gap: 20px;
-	--bloc-posts-slider-speed: 250;
-	--bloc-posts-slider-theme: currentColor;
-	--bloc-posts-accordion-gap: 1.5rem;
-	--bloc-posts-accordion-speed: 0.5s;
-	--bloc-posts-accordion-easing: cubic-bezier(0.46, 0.03, 0.52, 0.96);
-}
-```
-
-Note: `--bloc-posts-slider-gap` must be set in pixels.
-
-## Todo
-
-### Common
-- Need to use a select store instead of get apiFetch so requests are cached.

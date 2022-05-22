@@ -1,0 +1,41 @@
+/**
+ * The following styles get applied on the editor only.
+ */
+
+ // Block styles
+.bloc-slider {
+	&[data-pagination="false"] {
+		.swiper-pagination {
+			display: none;
+		}
+	}
+
+	&[data-navigation="false"] {
+		.swiper-navigation {
+			display: none;
+		}
+	}
+
+	&.is-selected {
+		margin-bottom: 32px !important;
+	}
+
+	.appender {
+		width: 100%;
+		border: 1px solid;
+		padding: 0.275rem 0.75rem;
+		border-radius: 3px;
+		background-color: transparent;
+		cursor: pointer;
+		transition: opacity;
+		margin-top: 3px;
+		position: absolute;
+		top: calc(100% + 5px);
+
+		&:hover,
+		&:focus {
+			opacity: 0.75;
+			box-shadow: 0 0 3px rgba(0, 0, 0, 0.25) ;
+		}
+	}
+}

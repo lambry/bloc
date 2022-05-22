@@ -1,9 +1,9 @@
-@use "common/styles/vars";
-
 /**
  * The following styles get applied to the frontend only.
  */
+@use "common/styles/vars";
 
+// Custom properties
 :root {
 	--bloc-animation-duration: 1s;
 	--bloc-animation-distance: 1rem;

@@ -1,6 +1,25 @@
-// Common frontend styles
+/**
+ * The following styles get applied both on the front end and in the editor.
+ */
 @import "swiper/scss";
 @import "swiper/scss/navigation";
 @import "swiper/scss/pagination";
 @import "swiper/scss/autoplay";
 @import "swiper/scss/effect-fade";
+
+// Block styles
+.bloc {
+	&-align {
+		&-top {
+			align-items: start;
+		}
+
+		&-center {
+			align-items: center;
+		}
+
+		&-bottom {
+			align-items: end;
+		}
+	}
+}

@@ -1,7 +1,7 @@
 {
 	"name": "bloc",
 	"version": "0.1.1",
-	"description": "A few useful WordPress blocks.",
+	"description": "A few useful WordPress blocks and block options.",
 	"author": "Lambry",
 	"license": "GPL-2.0-or-later",
 	"main": "src/editor.js",

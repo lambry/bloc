@@ -5,11 +5,10 @@
 
 // Custom properties
 :root {
-	--bloc-posts-grid-gap: 2rem;
-	--bloc-posts-slider-gap: 20px;
-	--bloc-posts-accordion-gap: 1.5rem;
-	--bloc-posts-slider-theme: currentColor;
-	--bloc-posts-slider-speed: 300;
+	--bloc-posts-gap: 2rem;
+	--bloc-posts-theme: currentColor;
+	--bloc-posts-easing: cubic-bezier(0.46, 0.03, 0.52, 0.96);
+	--bloc-posts-duration: 300;
 }
 
 // Columns for grids and optionally accordions
@@ -31,21 +30,22 @@
 
 // Block styles
 .bloc-posts {
+	&-gap {
+		gap: var(--bloc-grid-gap);
+	}
+
 	&-grid {
 		display: grid;
-		gap: var(--bloc-posts-grid-gap);
 	}
 
 	&-slider {
-		--swiper-theme-color: var(--bloc-posts-slider-theme);
+		--swiper-theme-color: var(--bloc-posts-theme);
 
 		position: relative;
-		gap: var(--bloc-posts-slider-gap);
 	}
 
 	&-accordion {
 		display: grid;
-		gap: var(--bloc-posts-accordion-gap);
 
 		&-title {
 			margin: 0;

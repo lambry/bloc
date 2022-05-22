@@ -4,28 +4,32 @@ import { getProp } from "common/scripts/helpers";
 
 Swiper.use([Autoplay, EffectFade, Navigation, Pagination]);
 
-export default function useSlider(ref, attributes) {
-	const { display } = attributes;
+/**
+ * Set a swipper slider.
+ */
+export default function useSlider(ref, attributes, name) {
 	const [slider, setSlider] = useState(null);
 
 	// Setup initial slider
 	useEffect(() => {
-		if (display === 'slider' && ref) {
-			initSlider(attributes);
-		}
+		ref && initSlider(attributes);
 
 		return () => removeSlider();
 	}, []);
 
 	// Init the slider
 	const initSlider = (attributes) => {
-		setSlider(
-			new Swiper(ref.current.querySelector(".swiper"), getOptions(attributes))
-		);
+		if (slider) return updateSlider(attributes);
+
+		const target = ref.current.querySelector(".swiper");
+
+		if (target) {
+			setSlider(new Swiper(target, getOptions(attributes)));
+		}
 	};
 
 	// Update the slider
-	const updateSlider = (attributes) => {
+	const updateSlider = (attributes, index = null) => {
 		if (! slider) return initSlider(attributes);
 
 		const { pagination, navigation, ...params} = getOptions(attributes);
@@ -37,19 +41,27 @@ export default function useSlider(ref, attributes) {
 		slider.currentBreakpoint = false;
 
 		slider.update();
+
+		if (index) slider.slideTo(index);
 	};
 
 	// Remove the slider
 	const removeSlider = () => {
-		return slider ? slider.destroy() : null;
+		setSlider(null);
+
+		if (slider) {
+			slider.destroy();
+		}
 	};
 
 	// Get all slider options
 	const getOptions = ({ columnsSmall, columnsMedium, columnsLarge, gapless }) => ({
-		spaceBetween: gapless ? 0 : getProp(ref.current, "content-slider-gap"),
+		speed: getProp(ref.current, `${name}-duration`, { integer: true }),
+		spaceBetween: gapless ? 0 : getProp(ref.current, 'gap', { integer: true, computed: true }),
 		pagination: {
 			clickable: true,
 			el: `#${ref.current.id} .swiper-pagination`,
+			bulletElement: "button",
 		},
 		navigation: {
 			nextEl: `#${ref.current.id} .swiper-button-next`,
@@ -66,5 +78,5 @@ export default function useSlider(ref, attributes) {
 		}
 	});
 
-	return [updateSlider, removeSlider];
+	return { initSlider, updateSlider, removeSlider };
 }

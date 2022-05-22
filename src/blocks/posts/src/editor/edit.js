@@ -3,15 +3,20 @@ import { useSelect } from "@wordpress/data";
 import ServerSideRender from "@wordpress/server-side-render";
 import { InspectorControls } from "@wordpress/block-editor";
 import { PanelBody, SelectControl, FormTokenField, RangeControl, ToggleControl, TextControl } from "@wordpress/components";
-import { useState, useEffect } from "@wordpress/element";
-import Breakpoints from "common/components/breakpoints";
+import { useRef, useState, useEffect } from "@wordpress/element";
+import { Breakpoints } from "common/components";
+import { useInDom, useSlider } from "common/hooks";
 import { displayOptions, filterTypes, orderOptions, orderByOptions } from "./options";
 import { get, query, unique, debounce, tokenValues, tokenLabels, tokenSuggestions } from "common/scripts/helpers";
 
 import "./editor.scss";
 
-export default function Edit({ attributes, setAttributes }) {
-	const { display, number, columnsSmall, columnsMedium, columnsLarge, autoPlay, fadeSlides, loopSlides, openFirst, openIndividually, navigation, pagination, type, taxonomy, term, offset, specific, include, children, sticky, filter, filterBy, filterType, filterValue, order, orderBy, orderMeta } = attributes;
+export default function Edit({ attributes, setAttributes, clientId }) {
+	const { display, number, columnsSmall, columnsMedium, columnsLarge, autoPlay, fadeSlides, loopSlides, openFirst, openIndividually, navigation, pagination, gapless, type, taxonomy, term, offset, specific, include, children, sticky, filter, filterBy, filterType, filterValue, order, orderBy, orderMeta } = attributes;
+
+	const postsRef = useRef();
+	const inDom = useInDom(postsRef, '.swiper');
+	const { initSlider, removeSlider } = useSlider(postsRef, attributes, 'posts');
 
 	const types = [...(useSelect((select) => select("core").getPostTypes()) || [])]
 		.filter(({ viewable }) => viewable)
@@ -21,6 +26,9 @@ export default function Edit({ attributes, setAttributes }) {
 	let [taxonomies, setTaxonomies] = useState([]);
 	let [includes, setIncludes] = useState([]);
 	let [fields, setFields] = useState([]);
+
+	// Update the slider when dom is ready
+	useEffect(() => inDom ? initSlider(attributes) : removeSlider(), [inDom]);
 
 	// On load setup
 	useEffect(() => {
@@ -148,6 +156,11 @@ export default function Edit({ attributes, setAttributes }) {
 							onChange={() => setAttributes({ openIndividually: !openIndividually })}
 						/>
 					</>}
+					<ToggleControl
+						label={__("Remove post gap", "bloc")}
+						checked={gapless}
+						onChange={() => setAttributes({ gapless: !gapless })}
+					/>
 				</PanelBody>
 				<PanelBody title={__("Source", "bloc")} initialOpen={false}>
 					{!specific && (
@@ -271,7 +284,9 @@ export default function Edit({ attributes, setAttributes }) {
 					)}
 				</PanelBody>
 			</InspectorControls>
-			<ServerSideRender block="bloc/posts" attributes={attributes} />
+			<div ref={postsRef} id={`bloc-posts-${clientId}`}>
+				<ServerSideRender block="bloc/posts" attributes={attributes} />
+			</div>
 		</>
 	);
 }

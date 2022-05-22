@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Bloc
  * Plugin URI: https://github.com/lambry/bloc/
- * Description: A few useful WordPress blocks.
+ * Description: A few useful WordPress blocks and block options.
  * Version: 0.1.0
  * Author: Lambry
  * Author URI: https://lambry.com/
@@ -33,7 +33,7 @@ class Bloc
 		$this->init();
 
 		add_action('enqueue_block_editor_assets', [$this, 'editor']);
-		add_action('enqueue_block_assets', [$this, 'mixed']);
+		add_action('enqueue_block_assets', [$this, 'universal']);
 		add_action('wp_enqueue_scripts', [$this, 'frontend']);
 	}
 
@@ -46,7 +46,8 @@ class Bloc
 		$this->frontend = include plugin_dir_path(__FILE__) . 'build/frontend/frontend.asset.php';
 
 		$this->include('options/options', 'Options');
-		$this->include('blocks/content/content', 'Blocks\Content');
+		$this->include('blocks/grid/grid', 'Blocks\Grid');
+		$this->include('blocks/slider/slider', 'Blocks\Slider');
 		$this->include('blocks/posts/posts', 'Blocks\Posts');
 	}
 
@@ -62,9 +63,9 @@ class Bloc
 	/**
 	 * Enqueue editor/frontend assets.
 	 */
-	public function mixed() : void
+	public function universal() : void
 	{
-		wp_enqueue_style('bloc-mixed-style', BLOC_URL . 'build/editor/style-editor.css', [], $this->editor['version']);
+		wp_enqueue_style('bloc-universal-style', BLOC_URL . 'build/editor/style-editor.css', [], $this->editor['version']);
 	}
 
 	/**

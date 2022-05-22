@@ -1,0 +1,31 @@
+/**
+ * The following styles get applied both on the front end and in the editor.
+ */
+
+// Custom properties
+:root {
+	--bloc-slider-gap: 2rem;
+	--bloc-slider-duration: 250;
+	--bloc-slider-theme: currentColor;
+}
+
+// Block styles
+.bloc-slider {
+	--swiper-theme-color: var(--bloc-slider-theme);
+
+	&-gap {
+		gap: var(--bloc-slider-gap);
+	}
+
+	&-slide {
+		position: relative;
+	}
+
+	&-background-image {
+		inset: 0;
+		position: absolute;
+		height: 100%;
+		width: 100%;
+		object-fit: cover;
+	}
+}
