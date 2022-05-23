@@ -14,11 +14,17 @@ export default function Edit({ attributes, setAttributes, context }) {
 		template: [["core/paragraph"]],
 	});
 
-	useEffect(() => setAttributes({
-		gridSmall: context["bloc/grid/small"],
-		gridMedium: context["bloc/grid/medium"],
-		gridLarge: context["bloc/grid/large"]
-	}), [context]);
+	// Mark sure columns fall within the grid
+	useEffect(() => {
+		setAttributes({
+			gridSmall: context["bloc/grid/small"],
+			gridMedium: context["bloc/grid/medium"],
+			gridLarge: context["bloc/grid/large"],
+			columnsSmall: context["bloc/grid/small"] < columnsSmall ? context["bloc/grid/small"] : columnsSmall,
+			columnsMedium: context["bloc/grid/medium"] < columnsMedium ? context["bloc/grid/medium"] : columnsMedium,
+			columnslarge: context["bloc/grid/large"] < columnsLarge ? context["bloc/grid/large"] : columnsLarge,
+		});
+	}, [context]);
 
 	return <>
 		<InspectorControls>

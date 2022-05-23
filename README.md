@@ -60,8 +60,10 @@ Block to display content in a slider, or carousel (i.e. a slider with multiple s
 
 - Display any number of slides.
 - Choose the number slides to show a once at different screen sizes.
-- Tranition between slides with swiper or fade effects.
-- Loop slidesfor an inifitnte slider.
+- Optionally add a background image to each slide.
+- Optionally link the entire slide.
+- Choose between slide and fade effects.
+- Loop slides for an inifitnte slider.
 - Show or hide the navigation arrows.
 - Show or hide the pagination i.e. bullets.
 - Add or remove spacing between slides.

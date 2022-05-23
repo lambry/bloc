@@ -1,4 +1,3 @@
-// ImageSelector.js
 import { __ } from "@wordpress/i18n";
 import { useSelect } from "@wordpress/data";
 import { useEffect } from "@wordpress/element";

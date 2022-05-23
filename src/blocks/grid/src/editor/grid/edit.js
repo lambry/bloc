@@ -10,8 +10,8 @@ export default function Edit({ attributes, setAttributes }) {
 	const blockProps = useBlockProps({ className: getClasses(attributes) });
 
 	const innerBlocksProps = useInnerBlocksProps(blockProps, {
-		allowedBlocks: ["bloc/column"],
-		template: Array(columnsLarge).fill(["bloc/column"])
+		allowedBlocks: ["bloc/cell"],
+		template: Array(columnsLarge).fill(["bloc/cell"])
 	});
 
 	return (

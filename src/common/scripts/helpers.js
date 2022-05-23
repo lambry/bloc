@@ -95,6 +95,7 @@ export function getProp(el, name, params = {}) {
 		value = getComputedStyle(el).getPropertyValue(`--bloc-${name}`);
 	}
 
+	value = integer ? parseInt(value) : value;
 
-	return integer ? parseInt(value) : value;
+	return Number.isNaN(value) ? 0 : value;
 }

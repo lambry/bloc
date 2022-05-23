@@ -22,6 +22,6 @@ class Grid
 	 */
 	public function register() {
 		register_block_type('bloc/grid');
-		register_block_type('bloc/column');
+		register_block_type('bloc/cell');
 	}
 }

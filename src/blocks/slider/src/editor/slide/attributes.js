@@ -16,4 +16,10 @@ export default {
 			size: "large",
 		},
 	},
+	linkUrl: {
+		type: "string",
+	},
+	linkTarget: {
+		type: "string",
+	},
 };

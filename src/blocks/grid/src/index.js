@@ -7,4 +7,4 @@
  * Import editor scripts.
  */
 import "./editor/grid/index";
-import "./editor/column/index";
+import "./editor/cell/index";

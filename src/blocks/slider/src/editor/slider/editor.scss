@@ -4,6 +4,10 @@
 
  // Block styles
 .bloc-slider {
+	&-slide {
+		min-height: 100px;
+	}
+
 	&[data-pagination="false"] {
 		.swiper-pagination {
 			display: none;
@@ -17,7 +21,7 @@
 	}
 
 	&.is-selected {
-		margin-bottom: 32px !important;
+		margin-bottom: 64px !important;
 	}
 
 	.appender {

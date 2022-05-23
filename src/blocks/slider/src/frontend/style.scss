@@ -5,4 +5,10 @@
 // Block styles
 .bloc-slider {
 	position: relative;
+
+	&-link {
+		inset: 0;
+		position: absolute;
+		z-index: 2;
+	}
 }

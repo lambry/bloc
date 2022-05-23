@@ -8,23 +8,6 @@
 	--bloc-grid-gap: 2rem;
 }
 
-// Columns for grids
-@for $i from 1 through vars.$columns {
-	.bloc-grid-sm-#{$i} {
-		grid-template-columns: repeat($i, 1fr);
-	}
-}
-
-@each $breakpoint, $width in vars.$breakpoints {
-	@media (min-width: $width) {
-		@for $i from 1 through vars.$columns {
-			.bloc-grid-#{$breakpoint}-#{$i} {
-				grid-template-columns: repeat($i, 1fr);
-			}
-		}
-	}
-}
-
 // Block styles
 .bloc-grid {
 	display: grid;
@@ -34,9 +17,20 @@
 		gap: var(--bloc-grid-gap);
 	}
 
+	// Columns for grids
+	@for $i from 1 through vars.$columns {
+		&-sm-#{$i} {
+			grid-template-columns: repeat($i, 1fr);
+		}
+	}
+
 	@each $breakpoint, $width in vars.$breakpoints {
 		@media (min-width: $width) {
 			@for $i from 1 through vars.$columns {
+				&-#{$breakpoint}-#{$i} {
+					grid-template-columns: repeat($i, 1fr);
+				}
+
 				&-column-#{$breakpoint}-#{$i} {
 					grid-column: span $i;
 				}

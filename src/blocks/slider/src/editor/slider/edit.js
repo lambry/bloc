@@ -27,7 +27,7 @@ export default function Edit({ attributes, setAttributes, isSelected, clientId, 
 
 	useEffect(() => {
 		updateSlider(attributes);
-	}, [columnsSmall, columnsMedium, columnsLarge, gapless, navigation, pagination]);
+	}, [innerBlockCount, columnsSmall, columnsMedium, columnsLarge, gapless, navigation, pagination]);
 
 	// Add new slides and scroll into view
 	const addSlide = () => {

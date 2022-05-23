@@ -7,14 +7,14 @@ import edit from "./edit";
 import save from "./save";
 
 /**
- * Register column block.
+ * Register cell block.
  */
-registerBlockType("bloc/column", {
+registerBlockType("bloc/cell", {
 	apiVersion: 2,
 	icon,
-	title: __("Column", "bloc"),
-	description: __("Display a single column within the grid.", "bloc"),
-	keywords: [__("bloc", "bloc"), __("grid", "bloc"), __("column", "bloc")],
+	title: __("Cell", "bloc"),
+	description: __("Display a single cell within the grid.", "bloc"),
+	keywords: [__("bloc", "bloc"), __("grid", "bloc"), __("cell", "bloc")],
 	parent: ["bloc/grid"],
 	category: "layout",
 	attributes,
@@ -25,7 +25,7 @@ registerBlockType("bloc/column", {
 			text: true,
 		},
 	},
-	usesContext: ["bloc/grid/large"],
+	usesContext: ["bloc/grid/small", "bloc/grid/medium", "bloc/grid/large"],
 	edit,
 	save,
 });
