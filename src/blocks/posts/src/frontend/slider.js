@@ -18,7 +18,7 @@ Swiper.use([Autoplay, EffectFade, Navigation, Pagination]);
 				crossFade: true
 			},
 			loop: loopSlides === 'true',
-			speed: getProp(item, 'posts-duration', { integer: true }),
+			speed: getProp(item, 'posts-slider-speed', { integer: true }),
 			spaceBetween: gapless !== '1' ? getProp(item, 'gap', { integer: true, computed: true }) : 0,
 			autoplay: Number(autoPlay) ? {
 				delay: autoPlay * 1000,

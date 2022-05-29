@@ -8,20 +8,16 @@
 		min-height: 100px;
 	}
 
-	&[data-pagination="false"] {
-		.swiper-pagination {
-			display: none;
-		}
+	&[data-pagination="false"] .swiper-pagination {
+		display: none;
 	}
 
-	&[data-navigation="false"] {
-		.swiper-navigation {
-			display: none;
-		}
+	&[data-navigation="false"] .swiper-navigation {
+		display: none;
 	}
 
 	&.is-selected {
-		margin-bottom: 64px !important;
+		margin-bottom: 124px !important;
 	}
 
 	.appender {
@@ -35,6 +31,7 @@
 		margin-top: 3px;
 		position: absolute;
 		top: calc(100% + 5px);
+		z-index: 99;
 
 		&:hover,
 		&:focus {

@@ -2,27 +2,13 @@
 @use "sass:math";
 @use "common/styles/vars";
 
-@each $breakpoint, $width in vars.$breakpoints {
-	@media (min-width: $width) {
-		@for $i from 1 through vars.$columns {
-			.bloc-posts[data-columns-#{$breakpoint}="#{$i}"] .bloc-posts-slider-item {
-				flex-basis: math.div(100%, $i);
-			}
-		}
-	}
-}
-
 // Block styles
 .bloc-posts {
 	&-slider {
 		overflow: hidden;
-
-		.swiper-wrapper {
-			gap: var(--bloc-posts-gap);
-		}
 	}
 
 	&-accordion[data-open-first="1"] .bloc-posts-accordion-item:first-child .bloc-posts-accordion-content {
-		display: block;
+		height: auto;
 	}
 }

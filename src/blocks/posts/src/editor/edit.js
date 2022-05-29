@@ -16,7 +16,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	const postsRef = useRef();
 	const inDom = useInDom(postsRef, '.swiper');
-	const { initSlider, removeSlider } = useSlider(postsRef, attributes, 'posts');
+	const { initSlider, removeSlider } = useSlider(postsRef, { name: 'posts', wrapper: true });
 
 	const types = [...(useSelect((select) => select("core").getPostTypes()) || [])]
 		.filter(({ viewable }) => viewable)
@@ -27,7 +27,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	let [includes, setIncludes] = useState([]);
 	let [fields, setFields] = useState([]);
 
-	// Update the slider when dom is ready
+	// Init the slider whenever it appears in the dom
 	useEffect(() => inDom ? initSlider(attributes) : removeSlider(), [inDom]);
 
 	// On load setup

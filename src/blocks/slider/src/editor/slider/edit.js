@@ -1,5 +1,5 @@
 import { __ } from "@wordpress/i18n";
-import { useBlockProps, useInnerBlocksProps, InspectorControls, BlockControls, BlockVerticalAlignmentToolbar } from "@wordpress/block-editor";
+import { useBlockProps, useInnerBlocksProps, InspectorControls } from "@wordpress/block-editor";
 import { PanelBody, RangeControl, ToggleControl } from "@wordpress/components";
 import { useRef, useEffect } from '@wordpress/element';
 import { createBlock } from '@wordpress/blocks';
@@ -10,20 +10,27 @@ import { getClasses, getAttributes } from "./helpers";
 
 import "./editor.scss";
 
-export default function Edit({ attributes, setAttributes, isSelected, clientId, ...rest }) {
-	const { verticalAlignment, columnsSmall, columnsMedium, columnsLarge, gapless, autoPlay, fadeSlides, loopSlides, navigation, pagination } = attributes;
+export default function Edit({ attributes, setAttributes, isSelected, clientId }) {
+	const { columnsSmall, columnsMedium, columnsLarge, gapless, autoPlay, fadeSlides, loopSlides, navigation, pagination } = attributes;
 
 	const sliderRef = useRef();
-	const { updateSlider } = useSlider(sliderRef, attributes, 'slider');
+	const { initSlider, updateSlider } = useSlider(sliderRef, { name: 'slider' });
 	const innerBlockCount = useSelect(select => select('core/block-editor').getBlock(clientId).innerBlocks.length);
 
-	const blockProps = useBlockProps({ className: getClasses(attributes), ...getAttributes(attributes) });
+	const blockProps = useBlockProps({
+		ref: sliderRef,
+		...getAttributes(attributes),
+		className: getClasses(attributes)
+	});
 
-	const innerBlockProps = useInnerBlocksProps({ className: 'swiper-wrapper' }, {
+	const innerBlocksProps = useInnerBlocksProps({ className: 'swiper-wrapper' }, {
 		renderAppender: false,
 		allowedBlocks: ["bloc/slide"],
 		template: Array(columnsLarge).fill(["bloc/slide"])
 	});
+
+	// Init and update slider
+	useEffect(() => initSlider(attributes), []);
 
 	useEffect(() => {
 		updateSlider(attributes);
@@ -105,15 +112,9 @@ export default function Edit({ attributes, setAttributes, isSelected, clientId, 
 					/>
 				</PanelBody>
 			</InspectorControls>
-			<BlockControls>
-				<BlockVerticalAlignmentToolbar
-					value={verticalAlignment}
-					onChange={(verticalAlignment) => setAttributes({ verticalAlignment })}
-				/>
-			</BlockControls>
-			<div {...blockProps} ref={sliderRef}>
+			<div {...blockProps}>
 				<div className="swiper">
-					<div {...innerBlockProps} />
+					<div {...innerBlocksProps} />
 				</div>
 				<div className="swiper-pagination" />
 				<button type="button" className="swiper-navigation swiper-button-prev"></button>

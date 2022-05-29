@@ -1,8 +1,4 @@
 export default {
-	verticalAlignment: {
-		type: "string",
-		default: "",
-	},
 	columnsSmall: {
 		type: "number",
 		default: 1

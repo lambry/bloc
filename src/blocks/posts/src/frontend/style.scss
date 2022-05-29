@@ -10,7 +10,7 @@
 		}
 
 		&-content {
-			transition: height var(--bloc-posts-durration) var(--bloc-posts-easing);
+			transition: all var(--bloc-posts-accordion-duration) var(--bloc-posts-accordion-easing);
 		}
 	}
 }

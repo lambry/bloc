@@ -29,10 +29,10 @@
 
 	// Open and accordion item
 	function openAccordion(item) {
-		const content = item.querySelector(".bloc-posts-accordion-content");
-
 		item.classList.add("is-open");
 		item.querySelector(".bloc-posts-accordion-toggle").setAttribute("aria-expanded", "true");
+
+		const content = item.querySelector(".bloc-posts-accordion-content");
 
 		content.style.height = "auto";
 
@@ -40,19 +40,22 @@
 
 		content.style.height = "0px";
 
-		setTimeout(() => content.style.height = height, 0);
+		setTimeout(() => {
+			content.style.height = height;
+
+			content.addEventListener("transitionend", () => content.style.height = "auto", { once: true });
+		}, 0);
 	}
 
 	// Close and accordion item
 	function closeAccordion(item) {
-		const content = item.querySelector(".bloc-posts-accordion-content");
-
-		content.style.height = "0px";
-
+		item.classList.remove("is-open");
 		item.querySelector(".bloc-posts-accordion-toggle").setAttribute("aria-expanded", "false");
 
-		content.addEventListener("transitionend", () => {
-			item.classList.remove("is-open");
-		}, { once: true });
+		const content = item.querySelector(".bloc-posts-accordion-content");
+
+		content.style.height = `${content.clientHeight}px`;
+
+		setTimeout(() => content.style.height = "0px", 0);
 	}
 })();

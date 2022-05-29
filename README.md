@@ -1,6 +1,8 @@
 # Bloc
 
-A few useful WordPress blocks.
+A few useful WordPress blocks and block options.
+
+`composer require lambry/bloc`
 
 ## Options
 
@@ -73,7 +75,7 @@ Block to display content in a slider, or carousel (i.e. a slider with multiple s
 ```css
 :root {
 	--bloc-slider-gap: 2rem;
-	--bloc-slider-speed: 250;
+	--bloc-slider-speed: 250ms;
 	--bloc-slider-theme: currentColor;
 }
 ```
@@ -106,9 +108,10 @@ You can override any aspect of the display by adding template files in a folder 
 ```css
 :root {
 	--bloc-posts-gap: 2rem;
-	--bloc-posts-theme: currentColor;
-	--bloc-posts-easing: cubic-bezier(0.46, 0.03, 0.52, 0.96);
-	--bloc-posts-duration: 250;
+	--bloc-posts-slider-speed: 500ms;
+	--bloc-posts-slider-theme: currentColor;
+	--bloc-posts-accordion-easing: cubic-bezier(0.46, 0.03, 0.52, 0.96);
+	--bloc-posts-accordion-duration: 250ms;
 }
 ```
 

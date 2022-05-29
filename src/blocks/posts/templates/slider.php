@@ -1,6 +1,6 @@
 <?php // Template Version: 0.1.0 ?>
 <?php if ($query->have_posts()) : ?>
-	<section id="<?= $attributes['anchor']; ?>" class="bloc-posts bloc-posts-<?= $attributes['display']; ?> <?= $attributes['className']; ?> <?= $attributes['gapless'] ? 'bloc-posts-gap' : '' ; ?>" data-columns-sm="<?= $attributes['columnsSmall']; ?>" data-columns-md="<?= $attributes['columnsMedium']; ?>" data-columns-lg="<?= $attributes['columnsLarge']; ?>" data-auto-play="<?= $attributes['autoPlay']; ?>" data-loop-slides="<?= $attributes['loopSlides']; ?>" data-fade-slides="<?= $attributes['fadeSlides']; ?>">
+	<section id="<?= $attributes['anchor']; ?>" class="bloc-posts bloc-posts-<?= $attributes['display']; ?> <?= !$attributes['gapless'] ? 'bloc-posts-gap' : '' ; ?> <?= $attributes['className']; ?>" data-columns-sm="<?= $attributes['columnsSmall']; ?>" data-columns-md="<?= $attributes['columnsMedium']; ?>" data-columns-lg="<?= $attributes['columnsLarge']; ?>" data-auto-play="<?= $attributes['autoPlay']; ?>" data-loop-slides="<?= $attributes['loopSlides']; ?>" data-fade-slides="<?= $attributes['fadeSlides']; ?>">
 		<div class="swiper">
 			<div class="swiper-wrapper">
 				<?php while ($query->have_posts()) : $query->the_post(); ?>

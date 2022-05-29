@@ -6,32 +6,16 @@
 // Custom properties
 :root {
 	--bloc-posts-gap: 2rem;
-	--bloc-posts-theme: currentColor;
-	--bloc-posts-easing: cubic-bezier(0.46, 0.03, 0.52, 0.96);
-	--bloc-posts-duration: 300;
-}
-
-// Columns for grids and optionally accordions
-@for $i from 1 through vars.$columns {
-	.bloc-posts-columns-sm-#{$i} {
-		grid-template-columns: repeat($i, 1fr);
-	}
-}
-
-@each $breakpoint, $width in vars.$breakpoints {
-	@media (min-width: $width) {
-		@for $i from 1 through vars.$columns {
-			.bloc-posts-columns-#{$breakpoint}-#{$i} {
-				grid-template-columns: repeat($i, 1fr);
-			}
-		}
-	}
+	--bloc-posts-slider-speed: 500ms;
+	--bloc-posts-slider-theme: currentColor;
+	--bloc-posts-accordion-easing: cubic-bezier(0.46, 0.03, 0.52, 0.96);
+	--bloc-posts-accordion-duration: 250ms;
 }
 
 // Block styles
 .bloc-posts {
 	&-gap {
-		gap: var(--bloc-grid-gap);
+		gap: var(--bloc-posts-gap);
 	}
 
 	&-grid {
@@ -39,7 +23,7 @@
 	}
 
 	&-slider {
-		--swiper-theme-color: var(--bloc-posts-theme);
+		--swiper-theme-color: var(--bloc-posts-slider-theme);
 
 		position: relative;
 	}
@@ -61,7 +45,24 @@
 		}
 
 		&-item:not(.is-open) .bloc-posts-accordion-content {
-			display: none;
+			height: 0;
+		}
+	}
+
+	// Columns for grids and optionally accordions
+	@for $i from 1 through vars.$columns {
+		&-columns-sm-#{$i} {
+			grid-template-columns: repeat($i, 1fr);
+		}
+	}
+
+	@each $breakpoint, $width in vars.$breakpoints {
+		@media (min-width: $width) {
+			@for $i from 1 through vars.$columns {
+				&-columns-#{$breakpoint}-#{$i} {
+					grid-template-columns: repeat($i, 1fr);
+				}
+			}
 		}
 	}
 }

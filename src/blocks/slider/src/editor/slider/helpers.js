@@ -4,7 +4,7 @@ import classnames from "classnames";
  * Get classes to apply.
  */
 export const getClasses = (attributes) => {
-	const { gapless, verticalAlignment, columnsSmall, columnsMedium, columnsLarge } = attributes;
+	const { gapless, columnsSmall, columnsMedium, columnsLarge } = attributes;
 
 	return classnames({
 		"bloc-slider": true,
@@ -12,7 +12,6 @@ export const getClasses = (attributes) => {
 		[`bloc-slider-sm-${columnsSmall}`]: columnsSmall,
 		[`bloc-slider-md-${columnsMedium}`]: columnsMedium,
 		[`bloc-slider-lg-${columnsLarge}`]: columnsLarge,
-		[`bloc-align-${verticalAlignment}`]: verticalAlignment,
 	});
 };
 

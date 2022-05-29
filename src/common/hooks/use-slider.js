@@ -7,13 +7,11 @@ Swiper.use([Autoplay, EffectFade, Navigation, Pagination]);
 /**
  * Set a swipper slider.
  */
-export default function useSlider(ref, attributes, name) {
+export default function useSlider(ref, options = {}) {
 	const [slider, setSlider] = useState(null);
 
 	// Setup initial slider
 	useEffect(() => {
-		ref && initSlider(attributes);
-
 		return () => removeSlider();
 	}, []);
 
@@ -22,9 +20,10 @@ export default function useSlider(ref, attributes, name) {
 		if (slider) return updateSlider(attributes);
 
 		const target = ref.current.querySelector(".swiper");
+		const wrapper = options.wrapper ? ref.current.querySelector(`.bloc-${options.name}`) : ref.current;
 
-		if (target) {
-			setSlider(new Swiper(target, getOptions(attributes)));
+		if (target && wrapper) {
+			setSlider(new Swiper(target, getOptions(attributes, wrapper)));
 		}
 	};
 
@@ -32,7 +31,9 @@ export default function useSlider(ref, attributes, name) {
 	const updateSlider = (attributes, index = null) => {
 		if (! slider) return initSlider(attributes);
 
-		const { pagination, navigation, ...params} = getOptions(attributes);
+		const wrapper = options.wrapper ? ref.current.querySelector(`.bloc-${options.name}`) : ref.current;
+
+		const { pagination, navigation, ...params} = getOptions(attributes, wrapper);
 
 		for (const param in params) {
 			slider.params[param] = params[param];
@@ -55,9 +56,9 @@ export default function useSlider(ref, attributes, name) {
 	};
 
 	// Get all slider options
-	const getOptions = ({ columnsSmall, columnsMedium, columnsLarge, gapless }) => ({
-		speed: getProp(ref.current, `${name}-duration`, { integer: true }),
-		spaceBetween: gapless ? 0 : getProp(ref.current, 'gap', { integer: true, computed: true }),
+	const getOptions = ({ columnsSmall, columnsMedium, columnsLarge, gapless }, wrapper) => ({
+		speed: getProp(wrapper, `${options.name}-speed`, { integer: true }),
+		spaceBetween: gapless ? 0 : getProp(wrapper, 'gap', { integer: true, computed: true }),
 		pagination: {
 			clickable: true,
 			el: `#${ref.current.id} .swiper-pagination`,

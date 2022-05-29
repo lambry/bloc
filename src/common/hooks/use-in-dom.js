@@ -27,7 +27,10 @@ export default function useInDom(ref, selector) {
 	// Handle mutations
 	const updated = (mutations) => {
 		mutations.forEach((mutation) => {
-			if (mutation.type === "childList" && mutation.addedNodes.length) {
+			if (mutation.type === "childList" &&
+				mutation.addedNodes.length &&
+				mutation.target.querySelector(selector)
+			) {
 				setInDom(true);
 			} else {
 				setInDom(false);
