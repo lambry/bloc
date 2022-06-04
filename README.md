@@ -17,6 +17,12 @@ Extensions to core blocks for a little extra functionality.
 - Retrict to: Only show blocks for certain user roles.
 - Visibility: Hide blocks for certain screen sizes.
 
+<div style="max-width: 750px">
+
+![options](images/options.jpg)
+
+</div>
+
 ### Custom properties
 
 ```css
@@ -42,9 +48,15 @@ Block to display content in a grid of rows and columns.
 ### Features
 
 - Display any number of items.
-- Choose the number columns to show per row at different screen sizes.
+- Choose the number columns to show at different screen sizes.
 - Add or remove spacing between columns.
-- Choose the number of columns or rows any individual column should span.
+- Choose the number of columns and rows any individual cell should span.
+
+<div style="max-width: 750px">
+
+![grid](images/grid.png)
+
+</div>
 
 ### Custom properties
 
@@ -69,6 +81,12 @@ Block to display content in a slider, or carousel (i.e. a slider with multiple s
 - Show or hide the navigation arrows.
 - Show or hide the pagination i.e. bullets.
 - Add or remove spacing between slides.
+
+<div style="max-width: 750px">
+
+![slider](images/slider.jpg)
+
+</div>
 
 ### Custom properties
 
@@ -95,6 +113,12 @@ Block for fetching posts, pages and custom post types and displaying them in a `
 - Accordion only options include: open first item and open one at a time.
 
 With the posts block you could choose to show all fantasy books sorted by price that are less than $20, or properties that feature waterfront views, have 3 or more bedroom and are sorted by land size.
+
+<div style="max-width: 750px">
+
+![posts](images/posts.jpg)
+
+</div>
 
 ### Templates
 
