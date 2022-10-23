@@ -128,10 +128,10 @@ You can override any aspect of the display by adding template files in a folder 
 ```php
 <?php
 // Filter to modify the main posts query arguments.
-add_filter('postie/query', fn(array $args) => array_merge($args, ['author_name' => 'admin']));
+add_filter('bloc/posts/query', fn(array $args) => array_merge($args, ['author_name' => 'admin']));
 
 // Filter to set the no results i.e empty message.
-add_filter('postie/empty', function(string $message, string $display) {
+add_filter('bloc/posts/empty', function(string $message, string $display) {
     return __('Sorry, there were no matching results.');
 }, 10, 2);
 ```
